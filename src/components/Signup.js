@@ -1,16 +1,16 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
 
-function Login() {
+function Signup() {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
 
    const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-         await signInWithEmailAndPassword(auth, email, password);
-         alert("Logged in successfully");
+         await createUserWithEmailAndPassword(auth, email, password);
+         alert("Account created successfully");
       } catch (error) {
          alert(error.message);
       }
@@ -18,7 +18,7 @@ function Login() {
 
    return (
       <div>
-         <h1>Login Page</h1>
+         <h1>Signup Page</h1>
          <form onSubmit={handleSubmit}>
             <input
                type="email"
@@ -32,10 +32,10 @@ function Login() {
                value={password}
                onChange={(e) => setPassword(e.target.value)}
             />
-            <button type="submit">Login</button>
+            <button type="submit">Signup</button>
          </form>
       </div>
    );
 }
 
-export default Login;
+export default Signup;
