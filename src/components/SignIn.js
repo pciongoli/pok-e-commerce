@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase";
+import "../styles/SignIn.css";
 
-function Login() {
+function SignIn() {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
 
@@ -38,4 +39,4 @@ function Login() {
    );
 }
 
-export default Login;
+export default SignIn;
