@@ -1,9 +1,11 @@
 // src/components/Checkout.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import client, { createCheckout } from "../api/shopify";
+import { CartContext } from "../contexts/CartContext";
 
 function Checkout() {
+   const { cart } = useContext(CartContext);
    const [email, setEmail] = useState("");
    const [error, setError] = useState(null);
    const navigate = useNavigate();
@@ -11,12 +13,14 @@ function Checkout() {
    const handleSubmit = async (e) => {
       e.preventDefault();
       try {
+         const lineItems = cart.map((item) => ({
+            variantId: item.id,
+            quantity: item.quantity,
+         }));
+
          const checkout = await createCheckout(client, {
             email,
-            lineItems: [
-               // Add the line items from your cart here
-               // Example: { variantId: 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0VmFyaWFudC8x', quantity: 2 }
-            ],
+            lineItems,
          });
 
          if (checkout) {

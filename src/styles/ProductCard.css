@@ -1,0 +1,23 @@
+.product-card {
+   padding: 2rem;
+   text-align: center;
+}
+
+.product-card img {
+   display: block;
+   margin: 0 auto;
+}
+
+.product-card h2 {
+   margin: 1rem 0;
+}
+
+.product-card p {
+   margin: 0;
+}
+
+@media (max-width: 768px) {
+   .sign-in {
+      padding: 1rem;
+   }
+}

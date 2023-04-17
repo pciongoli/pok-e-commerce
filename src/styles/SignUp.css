@@ -1,0 +1,35 @@
+.sign-up {
+   width: 100%;
+   max-width: 400px;
+   margin: 0 auto;
+   padding: 2rem;
+}
+
+.sign-up form {
+   display: flex;
+   flex-direction: column;
+}
+
+.sign-up label {
+   margin-top: 1rem;
+}
+
+.sign-up input {
+   margin-top: 0.5rem;
+   padding: 0.5rem;
+}
+
+.sign-up button {
+   margin-top: 1.5rem;
+   padding: 0.5rem;
+   background-color: blue;
+   color: white;
+   border: none;
+   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+   .sign-up {
+      padding: 1rem;
+   }
+}

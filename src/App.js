@@ -1,8 +1,8 @@
 // src/App.js
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import client from "./api/shopify";
 import { auth } from "./firebase";
+import { CartContext } from "../src/contexts/CartContext";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -17,6 +17,7 @@ import Checkout from "./components/Checkout";
 
 function App() {
    const [currentUser, setCurrentUser] = useState(null);
+   const [cart, setCart] = useState([]);
 
    useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -31,20 +32,22 @@ function App() {
 
    return (
       <Router>
-         <div className="App">
-            <Header currentUser={currentUser} />
-            <Routes>
-               <Route path="/" element={<Home />} />
-               <Route path="/products" element={<ProductList />} />
-               <Route path="/product/:id" element={<ProductCard />} />
-               <Route path="/cart" element={<ShoppingCart />} />
-               <Route path="/signin" element={<SignIn />} />
-               <Route path="/signup" element={<SignUp />} />
-               <Route path="/profile" element={<UserProfile />} />
-               <Route path="/checkout" element={<Checkout />} />
-            </Routes>
-            <Footer />
-         </div>
+         <CartContext.Provider value={{ cart, setCart }}>
+            <div className="App">
+               <Header currentUser={currentUser} />
+               <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/products" element={<ProductList />} />
+                  <Route path="/product/:id" element={<ProductCard />} />
+                  <Route path="/cart" element={<ShoppingCart />} />
+                  <Route path="/signin" element={<SignIn />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/profile" element={<UserProfile />} />
+                  <Route path="/checkout" element={<Checkout />} />
+               </Routes>
+               <Footer />
+            </div>
+         </CartContext.Provider>
       </Router>
    );
 }

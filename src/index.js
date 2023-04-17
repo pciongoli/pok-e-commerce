@@ -1,17 +1,19 @@
+// src/index.js
 import React from "react";
-import { createRoot } from "react-dom";
-import "./index.css";
+import ReactDOM from "react-dom";
 import App from "./App";
-import { AuthProvider } from "./contexts/AuthContext";
+import "./index.css";
+
+import { CartProvider } from "../src/contexts/CartContext";
 import reportWebVitals from "./reportWebVitals";
 
-const root = document.getElementById("root");
-createRoot(root).render(
+ReactDOM.render(
    <React.StrictMode>
-      <AuthProvider>
+      <CartProvider>
          <App />
-      </AuthProvider>
-   </React.StrictMode>
+      </CartProvider>
+   </React.StrictMode>,
+   document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

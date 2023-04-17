@@ -1,22 +1,9 @@
-// src/components/ShoppingCart.js
-import React, { useState } from "react";
+import React, { useContext } from "react";
+import { CartContext } from "../contexts/CartContext";
+import "../styles/ShoppingCart.css";
 
 function ShoppingCart() {
-   const [cart, setCart] = useState([
-      // Sample cart items, replace with your actual cart items
-      {
-         id: "1",
-         title: "Product 1",
-         price: 10,
-         quantity: 1,
-      },
-      {
-         id: "2",
-         title: "Product 2",
-         price: 20,
-         quantity: 2,
-      },
-   ]);
+   const { cart, setCart } = useContext(CartContext);
 
    const handleQuantityChange = (id, newQuantity) => {
       setCart((prevCart) =>
