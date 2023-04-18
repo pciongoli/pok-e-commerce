@@ -1,55 +1,35 @@
 // src/components/Checkout.js
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import client, { createCheckout } from "../api/shopify";
+import React, { useContext } from "react";
 import { CartContext } from "../contexts/CartContext";
+import { createCheckout } from "../api/shopify";
+import "../styles/Checkout.css";
 
-function Checkout() {
+const Checkout = () => {
    const { cart } = useContext(CartContext);
-   const [email, setEmail] = useState("");
-   const [error, setError] = useState(null);
-   const navigate = useNavigate();
 
-   const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-         const lineItems = cart.map((item) => ({
-            variantId: item.id,
-            quantity: item.quantity,
-         }));
+   const handleCheckout = async () => {
+      if (cart.length === 0) {
+         alert("Your cart is empty!");
+         return;
+      }
 
-         const checkout = await createCheckout(client, {
-            email,
-            lineItems,
-         });
+      const checkout = await createCheckout();
 
-         if (checkout) {
-            window.location.assign(checkout.webUrl);
-         }
-      } catch (err) {
-         setError(err.message);
+      if (checkout) {
+         window.location.assign(checkout.webUrl);
+      } else {
+         alert(
+            "There was an error processing your checkout. Please try again."
+         );
       }
    };
 
    return (
-      <div>
+      <div className="checkout">
          <h1>Checkout</h1>
-         {error && <p>{error}</p>}
-         <form onSubmit={handleSubmit}>
-            <div>
-               <label htmlFor="email">Email:</label>
-               <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-               />
-            </div>
-            <button type="submit">Checkout</button>
-         </form>
+         <button onClick={handleCheckout}>Proceed to Checkout</button>
       </div>
    );
-}
+};
 
 export default Checkout;

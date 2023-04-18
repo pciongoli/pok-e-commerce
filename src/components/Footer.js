@@ -6,8 +6,7 @@ const Footer = () => {
    return (
       <footer>
          <p>
-            &copy; {new Date().getFullYear()} Pokémon Card Marketplace. All
-            rights reserved.
+            &copy; {new Date().getFullYear()} PokéDegens. All rights reserved.
          </p>
       </footer>
    );

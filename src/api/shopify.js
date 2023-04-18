@@ -3,7 +3,7 @@ import { GraphQLClient } from "graphql-request";
 
 const storefrontAccessToken =
    process.env.REACT_APP_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-const endpoint = "https://poke-degen.myshopify.com/api/2022-01/graphql.json";
+const endpoint = "https://2dc667.myshopify.com/api/2022-01/graphql.json";
 
 const client = new GraphQLClient(endpoint, {
    headers: {

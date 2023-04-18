@@ -1,12 +1,15 @@
 // src/components/Header.js
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { auth } from "../firebase";
+import { CartContext } from "../contexts/CartContext";
 import "../styles/Header.css";
 
 const Header = () => {
    const [currentUser, setCurrentUser] = useState(null);
    const [isMenuOpen, setIsMenuOpen] = useState(false);
+   const [cartItemsCount, setCartItemsCount] = useState(0);
+   const { cart } = useContext(CartContext);
 
    useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -17,6 +20,10 @@ const Header = () => {
          unsubscribe();
       };
    }, []);
+
+   useEffect(() => {
+      setCartItemsCount(cart.reduce((total, item) => total + item.quantity, 0));
+   }, [cart]);
 
    const handleLogout = async () => {
       try {
@@ -44,6 +51,15 @@ const Header = () => {
             <Link to="/cart" onClick={handleLinkClick}>
                Cart
             </Link>
+            {cartItemsCount > 0 && (
+               <Link
+                  to="/checkout"
+                  onClick={handleLinkClick}
+                  className="cart-icon"
+               >
+                  🛒 ({cartItemsCount})
+               </Link>
+            )}
             {!currentUser && (
                <>
                   <Link to="/signin" onClick={handleLinkClick}>

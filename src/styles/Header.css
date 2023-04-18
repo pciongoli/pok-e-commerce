@@ -35,6 +35,11 @@
    width: 24px;
 }
 
+.cart-icon {
+   margin-left: 1rem;
+   font-size: 1.2rem;
+}
+
 @media (max-width: 768px) {
    .nav-links {
       position: absolute;

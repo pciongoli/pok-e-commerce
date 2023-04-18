@@ -1,6 +1,25 @@
+/* src/styles/ProductCard.css */
+.product-card-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+}
+
 .product-card {
-   padding: 2rem;
-   text-align: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   padding: 16px;
+   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+   border-radius: 4px;
+   max-width: 300px;
+}
+
+.product-card img {
+   object-fit: cover;
+   border-radius: 4px;
+   margin-bottom: 16px;
 }
 
 .product-card img {

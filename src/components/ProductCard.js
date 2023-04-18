@@ -22,12 +22,13 @@ function ProductCard() {
    }, [id]);
 
    return (
-      <div>
+      <div className="product-card-container">
          <h1>Product Card</h1>
          {product ? (
-            <div>
+            <div className="product-card">
+               {console.log("Image URL:", product.images.edges[0]?.node?.src)}
                <img
-                  src={product.images[0]?.src}
+                  src={product.images.edges[0]?.node?.src}
                   alt={product.title}
                   width="300"
                   height="300"
